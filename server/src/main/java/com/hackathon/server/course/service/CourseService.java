@@ -116,6 +116,8 @@ public class CourseService {
 
 
         return CourseResponse.builder()
+                .centerX(twoThird[0])
+                .centerY(twoThird[1])
                 .courseDtos(courseDtos)
                 .build();
     }
