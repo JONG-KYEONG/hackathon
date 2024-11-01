@@ -141,12 +141,21 @@ public class CourseService {
     }
 
     public static double calculateHaversineDistance(double x1, double y1, double x2, double y2) {
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-        double a = Math.pow(Math.sin(dy / 2), 2)
-                + Math.cos(y1) * Math.cos(y2) * Math.pow(Math.sin(dx / 2), 2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        return 6371 * c; // 지구 반경(km)
+        double R = 6371; // 지구 반지름 (km)
+        double dY = deg2rad(y2 - y1);
+        double dX = deg2rad(x2 - x1);
+
+        double a = Math.sin(dY / 2) * Math.sin(dY / 2) +
+                Math.cos(deg2rad(y1)) * Math.cos(deg2rad(y2)) *
+                        Math.sin(dX / 2) * Math.sin(dX / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c; // 거리 (km)
+
+        return distance;
+    }
+
+    public static double deg2rad(double deg) {
+        return deg * (Math.PI / 180);
     }
 
 }
