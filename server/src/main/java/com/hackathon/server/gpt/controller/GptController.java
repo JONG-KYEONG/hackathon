@@ -23,7 +23,6 @@ public class GptController {
 
     @GetMapping("/image")
     public List<TouristAttraction> imageAnalysis(@RequestParam String imageUrl) {
-        // TODO: GPT 호출 Service 실행
         ImageUrl imageUrl1 = new ImageUrl(imageUrl);
         GptResponse gptResponse = gptService.requestImageAnalysis(imageUrl1);
         TextMessage message = (TextMessage) gptResponse.getChoices().get(0).getMessage();
@@ -32,7 +31,7 @@ public class GptController {
 
         List<TouristAttraction> touristAttractions = new ArrayList<>();
 
-        String[] places = text.split(",");
+        String[] places = text.split(", ");
         for (String place : places) {
             touristAttractions.add(
                     touristAttractionRepository.findByName(place)
