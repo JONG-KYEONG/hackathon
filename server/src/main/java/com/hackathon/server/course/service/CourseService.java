@@ -28,14 +28,18 @@ public class CourseService {
         double distance = calculateHaversineDistance(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY());
         int courseCount = getCourseCount(distance);
 
-        if(courseCount == 0){
-            return new CourseResponse(new ArrayList<>());
-        }
-
         double[] oneThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 1.0 / 5.0);
         double[] twoThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 2.0 / 5.0);
         double[] threeThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 3.0 / 5.0);
         double[] fourThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 4.0 / 5.0);
+
+        if(courseCount == 0){
+            return CourseResponse.builder()
+                    .centerX(twoThird[0])
+                    .centerY(twoThird[1])
+                    .courseDtos(new ArrayList<>())
+                    .build();
+        }
 
         List<CourseDto> courseDtos = new ArrayList<>();
         List<String> categorys = new ArrayList<>();
