@@ -6,8 +6,8 @@ import lombok.Builder;
 
 @Builder
 public record CourseDto(
-        Double x,
-        Double y,
+        Double lng,
+        Double lat,
         String name,
         String address,
         String overview,
@@ -17,8 +17,8 @@ public record CourseDto(
     public static CourseDto tourApiToCourseDto(Item item, double x, double y){
         return CourseDto.builder()
                 .name(item.getTitle())
-                .x(Double.parseDouble(item.getMapx()))
-                .y(Double.parseDouble(item.getMapy()))
+                .lat(Double.parseDouble(item.getMapx()))
+                .lat(Double.parseDouble(item.getMapy()))
                 .address(item.getAddr1() + item.getAddr2())
                 .overview(item.getOverview())
                 .imageUrl(item.getFirstimage())
