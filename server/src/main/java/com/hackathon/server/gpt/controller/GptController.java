@@ -1,6 +1,7 @@
 package com.hackathon.server.gpt.controller;
 
 import com.hackathon.server.gpt.dto.ImageUrl;
+import com.hackathon.server.gpt.dto.response.GptResponse;
 import com.hackathon.server.gpt.service.GptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,8 @@ public class GptController {
     public String imageAnalysis(@RequestParam String imageUrl) {
         // TODO: GPT 호출 Service 실행
         ImageUrl imageUrl1 = new ImageUrl(imageUrl);
-        gptService.requestImageAnalysis(imageUrl1);
+        GptResponse gptResponse = gptService.requestImageAnalysis(imageUrl1);
+        System.out.println(gptResponse.getChoices());
         // TODO: 주변 맛집 Service 실행 ??
         return "";
     }
