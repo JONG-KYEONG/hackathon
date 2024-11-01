@@ -23,6 +23,9 @@ public class TouristAttraction {
     @Column(nullable = false, length = 1000)
     private String imageUrl;
 
+    @Column(length = 1000)
+    private String summary;
+
     private Double y;
 
     private Double x;
