@@ -26,6 +26,7 @@ public class GptService {
 
     public GptResponse requestImageAnalysis(ImageUrl imageUrl) {
         GptRequest request = GptRequest.createImageRequest(apiModel, 500, "user", requestText, imageUrl);
+
         return template.postForObject(apiUrl, request, GptResponse.class);
     }
 }

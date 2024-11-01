@@ -9,7 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class TextMessage extends Message {
-    private String role;
+public class TextMessage extends Message {
     private String content;
+
+    public TextMessage(String role, String content) {
+        super(role);
+        this.content = content;
+    }
 }

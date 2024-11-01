@@ -12,6 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImageMessage extends Message {
-    private String role;
     private List<Content> content;
+
+    public ImageMessage(String role, List<Content> content) {
+        super(role);
+        this.content = content;
+    }
 }
