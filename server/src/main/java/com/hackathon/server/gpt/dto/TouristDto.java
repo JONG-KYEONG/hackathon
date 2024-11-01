@@ -6,7 +6,6 @@ import lombok.Builder;
 
 @Builder
 public record TouristDto(
-        List<TouristAttraction> touristAttractions,
-        boolean flag
+        List<TouristAttraction> touristAttractions
 ) {
 }
