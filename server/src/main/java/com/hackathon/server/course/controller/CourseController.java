@@ -21,11 +21,16 @@ public class CourseController {
 
     @GetMapping("")
     @Operation(summary = "경로 추천 받기", description = "출발 x,y 좌표 / 도착 x,y 좌표 / 사용자 특성 넣어주세요. ")
-    public ResponseEntity<CourseResponse> getCourse(@RequestParam Double startX,
-                                                    @RequestParam Double startY,
+    public ResponseEntity<CourseResponse> getCourse(@RequestParam(required = false) Double startX,
+                                                    @RequestParam(required = false) Double startY,
                                                     @RequestParam Double endX,
                                                     @RequestParam Double endY,
                                                     @RequestParam String contents) {
+        if(startX == null){
+            startX = 129.10317348438963;
+            startY = 35.134080249513474;
+        }
+
         return new ResponseEntity<>(courseService.getCourse(CourseRequest.builder()
                         .startX(startX)
                         .startY(startY)
