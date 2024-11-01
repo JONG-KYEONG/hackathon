@@ -29,4 +29,6 @@ public class TouristAttraction {
     private Double y;
 
     private Double x;
+
+    private String address;
 }
