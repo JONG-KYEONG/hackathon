@@ -17,7 +17,7 @@ public record CourseDto(
     public static CourseDto tourApiToCourseDto(Item item, double x, double y){
         return CourseDto.builder()
                 .name(item.getTitle())
-                .lat(Double.parseDouble(item.getMapx()))
+                .lng(Double.parseDouble(item.getMapx()))
                 .lat(Double.parseDouble(item.getMapy()))
                 .address(item.getAddr1() + item.getAddr2())
                 .overview(item.getOverview())
