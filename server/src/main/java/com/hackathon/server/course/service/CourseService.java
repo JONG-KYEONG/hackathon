@@ -51,20 +51,29 @@ public class CourseService {
         else{
             categorys.add("관광지");
         }
+
         if(courseRequest.contents().contains("음식점")){
             categorys.add("음식점");
         }
         else{
             categorys.add("관광지");
         }
+
         if(courseRequest.contents().contains("문화시설")){
             categorys.add("문화시설");
+        }
+        else if(courseRequest.contents().contains("음식점")){
+            categorys.add("음식점");
         }
         else{
             categorys.add("관광지");
         }
+
         if(courseRequest.contents().contains("숙박")){
             categorys.add("숙박");
+        }
+        else if(courseRequest.contents().contains("음식점")){
+            categorys.add("음식점");
         }
         else{
             categorys.add("관광지");
