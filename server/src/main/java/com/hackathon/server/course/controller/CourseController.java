@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,7 +21,17 @@ public class CourseController {
 
     @GetMapping("")
     @Operation(summary = "경로 추천 받기", description = "출발 x,y 좌표 / 도착 x,y 좌표 / 사용자 특성 넣어주세요. ")
-    public ResponseEntity<CourseResponse> getCourse(@RequestBody CourseRequest courseRequest) {
-        return new ResponseEntity<>(courseService.getCourse(courseRequest), HttpStatus.OK);
+    public ResponseEntity<CourseResponse> getCourse(@RequestParam Double startX,
+                                                    @RequestParam Double startY,
+                                                    @RequestParam Double endX,
+                                                    @RequestParam Double endY,
+                                                    @RequestParam String contents) {
+        return new ResponseEntity<>(courseService.getCourse(CourseRequest.builder()
+                        .startX(startX)
+                        .startY(startY)
+                        .endX(endX)
+                        .endY(endY)
+                        .contents(contents)
+                .build()), HttpStatus.OK);
     }
 }
