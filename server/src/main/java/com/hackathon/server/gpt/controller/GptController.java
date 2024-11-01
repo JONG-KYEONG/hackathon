@@ -31,22 +31,14 @@ public class GptController {
         System.out.println("text = " + text);
 
         List<TouristAttraction> touristAttractions = new ArrayList<>();
-        boolean flag = false;
 
         String[] places = text.split(", ");
         for (String place : places) {
-            if (place.equals("-1")) {
-                continue;
-            } else if (place.equals("1")) {
-                flag = true;
-                continue;
-            }
             touristAttractions.add(
                     touristAttractionRepository.findByName(place)
                             .orElseThrow());
         }
         return TouristDto.builder()
-                .flag(flag)
                 .touristAttractions(touristAttractions)
                 .build();
     }
