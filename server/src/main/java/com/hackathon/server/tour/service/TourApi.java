@@ -84,22 +84,6 @@ public class TourApi {
     }
 
 
-    public URI getIntroUri(Long contentId, String contentTypeId){ // 카데고리에 맞는 api uri 생성 메소드
-        String ENDPOINT = "/detailIntro1";
-        String url = TOUR_API_BASE_URL + ENDPOINT;
-
-        URI uri = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("serviceKey", URLEncoder.encode(korService1_secret, StandardCharsets.UTF_8))
-                .queryParam("MobileOS", URLEncoder.encode("ETC", StandardCharsets.UTF_8))
-                .queryParam("MobileApp", URLEncoder.encode("yaguhang", StandardCharsets.UTF_8))
-                .queryParam("contentId", URLEncoder.encode(String.valueOf(contentId), StandardCharsets.UTF_8))
-                .queryParam("_type", URLEncoder.encode("json", StandardCharsets.UTF_8))
-                .queryParam("contentTypeId", URLEncoder.encode(contentTypeId, StandardCharsets.UTF_8))
-                .build(true)
-                .toUri();
-        return uri;
-    }
-
     public TourApiResponseDto getSpot(double x, double y, int radius, String category, int pageSize){
         try {
             return getSpot(x, y, radius, getContentTypeId(category), pageSize);

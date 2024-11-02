@@ -28,7 +28,6 @@ public class GptController {
         GptResponse gptResponse = gptService.requestImageAnalysis(imageUrl1);
         TextMessage message = (TextMessage) gptResponse.getChoices().get(0).getMessage();
         String text = message.getContent();
-        System.out.println("text = " + text);
 
         List<TouristAttraction> touristAttractions = new ArrayList<>();
 
