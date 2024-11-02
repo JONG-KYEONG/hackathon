@@ -1,4 +1,4 @@
-package com.hackathon.server.user.model;
+package com.hackathon.server.tour.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
-package com.hackathon.server.user.repository;
+package com.hackathon.server.tour.repository;
 
-import com.hackathon.server.user.model.TouristAttraction;
+import com.hackathon.server.tour.model.TouristAttraction;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package com.hackathon.server.gpt.dto;
 
-import com.hackathon.server.user.model.TouristAttraction;
+import com.hackathon.server.tour.model.TouristAttraction;
 import java.util.List;
 import lombok.Builder;
 
