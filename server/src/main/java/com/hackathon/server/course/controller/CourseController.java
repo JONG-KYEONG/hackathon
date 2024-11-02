@@ -26,10 +26,6 @@ public class CourseController {
                                                     @RequestParam Double endX,
                                                     @RequestParam Double endY,
                                                     @RequestParam String contents) {
-        if(startX == null){
-            startX = 129.1031734;
-            startY = 35.13408024;
-        }
 
         return new ResponseEntity<>(courseService.getCourse(CourseRequest.builder()
                         .startX(startX)

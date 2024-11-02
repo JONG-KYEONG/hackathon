@@ -25,13 +25,22 @@ public class CourseService {
     private static final int RADIUS = 1500;
 
     public CourseResponse getCourse (CourseRequest courseRequest){
-        double distance = calculateHaversineDistance(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY());
+        double startX = courseRequest.startX();
+        double startY = courseRequest.startY();
+
+        if(courseRequest.startX() == null){
+            startX = 129.1031734;
+            startY = 35.13408024;
+        }
+
+
+        double distance = calculateHaversineDistance(startX, startY, courseRequest.endX(), courseRequest.endY());
         int courseCount = getCourseCount(distance);
 
-        double[] oneThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 1.0 / 5.0);
-        double[] twoThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 2.0 / 5.0);
-        double[] threeThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 3.0 / 5.0);
-        double[] fourThird = divideCoordinates(courseRequest.startX(), courseRequest.startY(), courseRequest.endX(), courseRequest.endY(), 4.0 / 5.0);
+        double[] oneThird = divideCoordinates(startX, startY, courseRequest.endX(), courseRequest.endY(), 1.0 / 5.0);
+        double[] twoThird = divideCoordinates(startX, startY, courseRequest.endX(), courseRequest.endY(), 2.0 / 5.0);
+        double[] threeThird = divideCoordinates(startX, startY, courseRequest.endX(), courseRequest.endY(), 3.0 / 5.0);
+        double[] fourThird = divideCoordinates(startX, startY, courseRequest.endX(), courseRequest.endY(), 4.0 / 5.0);
 
         if(courseCount == 0){
             return CourseResponse.builder()
