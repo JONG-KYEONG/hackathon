@@ -2,12 +2,18 @@ package com.hackathon.server.gpt.service;
 
 import com.hackathon.server.gpt.dto.ImageUrl;
 import com.hackathon.server.gpt.dto.response.GptResponse;
+import com.hackathon.server.tour.model.TouristAttraction;
+import com.hackathon.server.tour.repository.TouristAttractionRepository;
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class GptService {
     @Value("${openai.model}")
@@ -17,6 +23,8 @@ public class GptService {
     private String apiUrl;
 
     private final RestTemplate template;
+
+    private final TouristAttractionRepository touristAttractionRepository;
 
     private final String requestText = "[감천문화마을, 흰여울문화마을, 해운대해수욕장, "
             + "광안리해수욕장, 태종대 유원지, 용두산공원과 부산타워, 송도 해상 케이블카, BIFF 광장과 국제시장,"
@@ -28,5 +36,16 @@ public class GptService {
         GptRequest request = GptRequest.createImageRequest(apiModel, 500, "user", requestText, imageUrl);
 
         return template.postForObject(apiUrl, request, GptResponse.class);
+    }
+    public List<TouristAttraction> getCourse(String text){
+        List<TouristAttraction> touristAttractions = new ArrayList<>();
+
+        String[] places = text.split(", ");
+        for (String place : places) {
+            touristAttractions.add(
+                    touristAttractionRepository.findByName(place)
+                            .orElseThrow());
+        }
+        return touristAttractions;
     }
 }

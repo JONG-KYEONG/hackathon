@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class GptController {
     private final GptService gptService;
-    private final TouristAttractionRepository touristAttractionRepository;
 
     @GetMapping("/image")
     public TouristDto imageAnalysis(@RequestParam String imageUrl) {
@@ -29,14 +28,8 @@ public class GptController {
         TextMessage message = (TextMessage) gptResponse.getChoices().get(0).getMessage();
         String text = message.getContent();
 
-        List<TouristAttraction> touristAttractions = new ArrayList<>();
+        List<TouristAttraction> touristAttractions = gptService.getCourse(text);
 
-        String[] places = text.split(", ");
-        for (String place : places) {
-            touristAttractions.add(
-                    touristAttractionRepository.findByName(place)
-                            .orElseThrow());
-        }
         return TouristDto.builder()
                 .touristAttractions(touristAttractions)
                 .build();

@@ -12,7 +12,6 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Service
 public class CourseService {
     private final TourApi tourApi;
